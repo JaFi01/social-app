@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a project for my computer science course. It will be a'la social media app using https://jsonplaceholder.typicode.com/ API, React and Node.js modules
 
 ## Available Scripts
 
