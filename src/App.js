@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import GeneralFeed from './components/GeneralFeed';
 import Photos from './components/Photos';
+import Profil from "./components/Profil";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -58,7 +59,7 @@ function App() {
         <nav>
           <ul>
             <li>
-              <a href="#">Profil</a>
+              <Link to="/profil">Profil</Link>
             </li>
             <li>
               <Link to="/general-feed">General Feed</Link>
@@ -75,6 +76,13 @@ function App() {
           </ul>
         </nav>
         <h1>Witaj, {user.name}!</h1>
+        <div>
+          <Routes>
+            <Route path="/profil" element={<Profil />} />
+            <Route path="/general-feed" element={<GeneralFeed />} />
+            <Route path="/photos" element={<Photos />} />
+          </Routes>
+        </div>
         <div>
           <h2>Zamieść nowy post:</h2>
           <label>Tytuł posta:</label>
@@ -98,10 +106,7 @@ function App() {
             <p>Brak postów do wyświetlenia.</p>
           )}
         </div>
-        <Routes>
-          <Route path="/general-feed" element={<GeneralFeed />} />
-          <Route path="/photos" element={<Photos />} />
-        </Routes>
+        
       </div>
     </BrowserRouter>
 );
