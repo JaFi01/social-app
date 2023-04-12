@@ -118,31 +118,31 @@ function App() {
           <br />
           <button onClick={handlePostSubmit}>Zamieść post</button>
         </div>
-        <div>
-      <h2>Moje wcześniejsze posty:</h2>
-      {myPosts.length > 0 ? (
-        myPosts.map((post) => (
-          <div key={post.id}>
-            <h3 style={{ fontSize: "1.2em" }}>{post.title}</h3>
-            <p>{post.body}</p>
-            {comments[post.id] ? (
-              <div>
-                <h4>Komentarze:</h4>
-                {comments[post.id].map((comment) => (
-                  <div key={comment.id}>
-                    <p>{comment.body}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p>Brak komentarzy do wyświetlenia.</p>
-            )}
-          </div>
-        ))
-      ) : (
-        <p>Brak postów do wyświetlenia.</p>
-      )}
-    </div>
+        <div posty>
+        <h2>Moje wcześniejsze posty:</h2>
+        {myPosts.length > 0 ? (
+          myPosts.map((post) => (
+            <div key={post.id}>
+              <h3 style={{ fontSize: "1.2em" }}>{post.title}</h3>
+              <p>{post.body}</p>
+              {comments[post.id] ? (
+                <div>
+                  <h4>Komentarze:</h4>
+                  {comments[post.id].map((comment) => (
+                    <div key={comment.id}>
+                      <p>{comment.body}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>Brak komentarzy do wyświetlenia.</p>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>Brak postów do wyświetlenia.</p>
+        )}
+      </div>
         
       </div>
     </BrowserRouter>
