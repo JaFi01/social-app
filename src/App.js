@@ -4,12 +4,15 @@ import Login from "./components/Login";
 import GeneralFeed from './components/GeneralFeed';
 import Photos from './components/Photos';
 import Profil from "./components/Profil";
+import './App.css'
 
 function App() {
   const [user, setUser] = useState(null);
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
   const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState({});
+  const [loadingComments, setLoadingComments] = useState(false);
 
   function handleLogin(user) {
     setUser(user);
@@ -26,6 +29,28 @@ function App() {
         .then((data) => setPosts(data));
     }
   }, [user]);
+
+  useEffect(() => {
+    async function fetchComments(postId) {
+      setLoadingComments(true);
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
+      );
+      const data = await response.json();
+      setComments((prevComments) => ({
+        ...prevComments,
+        [postId]: data,
+      }));
+      setLoadingComments(false);
+    }
+
+    if (posts.length > 0) {
+      posts.forEach((post) => {
+        fetchComments(post.id);
+      });
+    }
+  }, [posts]);
+
 
   function handlePostSubmit() {
     const newPost = {
@@ -80,7 +105,7 @@ function App() {
           <Routes>
             <Route path="/profil" element={<Profil />} />
             <Route path="/general-feed" element={<GeneralFeed />} />
-            <Route path="/photos" element={<Photos />} />
+            <Route path="/photos" element={<Photos user={user} />} />
           </Routes>
         </div>
         <div>
@@ -94,18 +119,30 @@ function App() {
           <button onClick={handlePostSubmit}>Zamieść post</button>
         </div>
         <div>
-          <h2>Moje wcześniejsze posty:</h2>
-          {myPosts.length > 0 ? (
-            myPosts.map((post) => (
-              <div key={post.id}>
-                <h3 style={{ fontSize: "1.2em" }}>{post.title}</h3>
-                <p>{post.body}</p>
+      <h2>Moje wcześniejsze posty:</h2>
+      {myPosts.length > 0 ? (
+        myPosts.map((post) => (
+          <div key={post.id}>
+            <h3 style={{ fontSize: "1.2em" }}>{post.title}</h3>
+            <p>{post.body}</p>
+            {comments[post.id] ? (
+              <div>
+                <h4>Komentarze:</h4>
+                {comments[post.id].map((comment) => (
+                  <div key={comment.id}>
+                    <p>{comment.body}</p>
+                  </div>
+                ))}
               </div>
-            ))
-          ) : (
-            <p>Brak postów do wyświetlenia.</p>
-          )}
-        </div>
+            ) : (
+              <p>Brak komentarzy do wyświetlenia.</p>
+            )}
+          </div>
+        ))
+      ) : (
+        <p>Brak postów do wyświetlenia.</p>
+      )}
+    </div>
         
       </div>
     </BrowserRouter>
