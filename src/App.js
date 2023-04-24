@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import GeneralFeed from './components/GeneralFeed';
 import Photos from './components/Photos';
 import Profil from "./components/Profil";
+import Albums from "./components/Albums";
 import './App.css'
 
 function App() {
@@ -93,7 +94,7 @@ function App() {
               <Link to="/photos">Photos</Link>
             </li>
             <li>
-              <a href="#">Albums</a>
+              <Link to="/albums">Albums</Link>
             </li>
             <li>
               <button onClick={handleLogout}>Wyloguj się</button>
@@ -106,6 +107,7 @@ function App() {
             <Route path="/profil" element={<Profil />} />
             <Route path="/general-feed" element={<GeneralFeed />} />
             <Route path="/photos" element={<Photos user={user} />} />
+            <Route path="/albums" element={<Albums />}/>
           </Routes>
         </div>
         <div>

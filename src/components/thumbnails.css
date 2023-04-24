@@ -1,0 +1,12 @@
+.photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .photos > div {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+  }

@@ -1,36 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import './thumbnails.css'
 
-const Photos = (props) => {
-  const { userId } = useParams();
+function Photos({ albumId }) {
   const [photos, setPhotos] = useState([]);
-  const hasUserId = !!userId && !!props.user?.id;
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   useEffect(() => {
-    if (hasUserId) {
-      fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${userId}&userId=${props.user.id}`)
-        .then(response => response.json())
-        .then(data => setPhotos(data));
-    }
-  }, [userId, props.user.id, hasUserId]);
+    fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
+      .then((response) => response.json())
+      .then((data) => setPhotos(data));
+  }, [albumId]);
 
   return (
     <div>
       <h2>Photos</h2>
-      {hasUserId ? (
-        <ul>
-          {photos.map(photo => (
-            <li key={photo.id}>
-              <img src={photo.thumbnailUrl} alt={photo.title} />
-              <p>{photo.title}</p>
-            </li>
-          ))}
-        </ul>
+      {selectedPhoto ? (
+        <div>
+          <img src={selectedPhoto.url} alt={selectedPhoto.title} />
+          <p>{selectedPhoto.title}</p>
+        </div>
       ) : (
-        <p>Brak identyfikatora użytkownika.</p>
+        <div className="photos">
+          {photos.map((photo) => (
+            <div
+              key={photo.id}
+              onClick={() => setSelectedPhoto(photo)}
+              style={{ backgroundImage: `url(${photo.thumbnailUrl})` }}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
-};
+}
 
 export default Photos;
