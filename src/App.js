@@ -75,6 +75,14 @@ function App() {
 
   const myPosts = posts.filter((post) => post.userId === user?.id);
 
+  const commentBoxes = document.querySelectorAll('.comment-box');
+
+  commentBoxes.forEach((commentBox) => {
+    commentBox.addEventListener('click', () => {
+      commentBox.classList.toggle('expanded');
+    });
+  });
+
   if (!user) {
     return <Login onLogin={handleLogin} />;
   }
@@ -84,6 +92,9 @@ function App() {
       <div>
         <nav>
           <ul>
+            <li>
+              <b href="#"><img src="https://images2.imgbox.com/80/4f/GuwZ2NCc_o.png" alt="Logo" class="logo"/></b>
+            </li>          
             <li>
               <Link to="/profil">Profil</Link>
             </li>
@@ -128,10 +139,11 @@ function App() {
               <h3 style={{ fontSize: "1.2em" }}>{post.title}</h3>
               <p>{post.body}</p>
               {comments[post.id] ? (
-                <div>
+                <div className="comment-box">
                   <h4>Komentarze:</h4>
                   {comments[post.id].map((comment) => (
                     <div key={comment.id}>
+                      <p1>{comment.email}</p1>
                       <p>{comment.body}</p>
                     </div>
                   ))}
