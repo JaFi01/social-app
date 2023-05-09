@@ -115,7 +115,7 @@ function App() {
         <h1>Witaj, {user.name}!</h1>
         <div>
           <Routes>
-            <Route path="/profil" element={<Profil />} />
+            <Route path="/profil" element={<Profil user={user}/>} />
             <Route path="/general-feed" element={<GeneralFeed />} />
             <Route path="/photos" element={<Photos user={user} />} />
             <Route path="/albums" element={<Albums />}/>
@@ -135,7 +135,7 @@ function App() {
         <h2>Moje wcześniejsze posty:</h2>
         {myPosts.length > 0 ? (
           myPosts.map((post) => (
-            <div key={post.id}>
+            <div className="post-container" key={post.id}>
               <h3 style={{ fontSize: "1.2em" }}>{post.title}</h3>
               <p>{post.body}</p>
               {comments[post.id] ? (

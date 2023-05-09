@@ -77,8 +77,13 @@ h4 {
   
 }
 
-.comment-box p {
+/*.comment-box p {
   margin: 0;
+}*/
+.post-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
 }
 
 .comment-box.expanded {
@@ -133,28 +138,3 @@ button:hover {
     width: 100%;
   }
 }
-/*
-.photos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.photos div {
-  margin: 10px;
-  flex-basis: calc(33.33% - 20px);
-}
-
-.photos h3 {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.photos img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-*/
