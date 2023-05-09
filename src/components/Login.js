@@ -30,7 +30,7 @@ function Login({ onLogin }) {
       <div>
         <h4>Jak się zalogować?</h4>
         <p>
-          Podaj adres login z bazy https://jsonplaceholder.typicode.com/users aby przejść dalej.
+          Podaj adres login z bazy <a href="https://jsonplaceholder.typicode.com/users">jsonplaceholder</a>  aby przejść dalej.
         </p>
       </div>
     </div>
