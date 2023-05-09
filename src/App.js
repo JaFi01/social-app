@@ -22,6 +22,9 @@ function App() {
   function handleLogout() {
     setUser(null);
   }
+  const handleSave = (updatedUser) => {
+    setUser(updatedUser);
+  };
 
   useEffect(() => {
     if (user) {
@@ -115,7 +118,7 @@ function App() {
         <h1>Witaj, {user.name}!</h1>
         <div>
           <Routes>
-            <Route path="/profil" element={<Profil user={user}/>} />
+            <Route path="/profil" element={<Profil user={user} onSave={handleSave}/>} />
             <Route path="/general-feed" element={<GeneralFeed />} />
             <Route path="/photos" element={<Photos user={user} />} />
             <Route path="/albums" element={<Albums />}/>

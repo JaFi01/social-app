@@ -27,7 +27,14 @@ function Login({ onLogin }) {
         </label>
         <button type="submit">Zaloguj się</button>
       </form>
+      <div>
+        <h4>Jak się zalogować?</h4>
+        <p>
+          Podaj adres login z bazy https://jsonplaceholder.typicode.com/users aby przejść dalej.
+        </p>
+      </div>
     </div>
+    
   );
 }
 
