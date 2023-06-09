@@ -14,6 +14,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState({});
   const [loadingComments, setLoadingComments] = useState(false);
+  const [newComment, setNewComment] = useState("");
 
   function handleLogin(user) {
     setUser(user);
@@ -66,6 +67,19 @@ function App() {
     setPosts([...posts, newPost]);
     setPostTitle("");
     setPostBody("");
+  }
+  function handleCommentSubmit(postId) {
+    const newCommentObj = {
+      postId: postId,
+      id: comments[postId]?.length + 1 || 1,
+      email: user.email,
+      body: newComment,
+    };
+    setComments((prevComments) => ({
+      ...prevComments,
+      [postId]: [...(prevComments[postId] || []), newCommentObj],
+    }));
+    setNewComment("");
   }
 
   function handleTitleChange(e) {
@@ -154,9 +168,18 @@ function App() {
               ) : (
                 <p>Brak komentarzy do wyświetlenia.</p>
               )}
+              <div>
+                <input
+                  type="text"
+                  placeholder="Twój komentarz..."
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                />
+                <button onClick={() => handleCommentSubmit(post.id)}>Dodaj komentarz</button>
+              </div>
             </div>
           ))
-        ) : (
+          ) : (
           <p>Brak postów do wyświetlenia.</p>
         )}
       </div>
